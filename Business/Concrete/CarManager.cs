@@ -12,7 +12,7 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-
+    
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
@@ -20,7 +20,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (car.Descriptions.Length >= 2 && car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine(" car does not added");
+            }
         }
 
         public void Delete(Car car)
@@ -31,11 +38,16 @@ namespace Business.Concrete
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
+        }      
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carDal.GetAll(p => p.BrandId == id);
         }
 
-        public Car GetById(int id)
+        public List<Car> GetCarsByColorId(int id)
         {
-          return _carDal.GetById(id);
+            return _carDal.GetAll(p => p.ColorId == id);
         }
 
         public void Update(Car car)

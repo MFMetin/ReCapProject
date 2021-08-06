@@ -16,7 +16,6 @@ namespace Entities.DTOs
         public int DailyPrice { get; set; }
         public string Descriptions { get; set; }
         public string ColorName { get; set; }
-
         public string BrandName { get; set; }
     }
 }

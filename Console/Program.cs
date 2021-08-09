@@ -26,10 +26,11 @@ namespace ConsoleUI
 
             var result = rentalManager.Add(new Rental
             {
-                
-                Id = 10,
+                CarId = 3,
+                CustomerId = 5,
+                RentDate = DateTime.Now,
                
-            });
+            }) ; 
             Console.WriteLine(result.Message);
         }
     }

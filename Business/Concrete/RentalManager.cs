@@ -23,10 +23,20 @@ namespace Business.Concrete
         }
         public IResult Add(Rental rental)
         {
-            if(rental.ReturnDate != null)
+         
+            bool available = true;
+
+            foreach (var item in _rentalDal.GetRentDetails())
+            {
+                if(item.CarId == rental.CarId && item.ReturnDate == null)
+                {
+                    available = false;
+                }                              
+            }
+            if (available)
             {
                 _rentalDal.Add(rental);
-                return new SuccessResult(Messages.CarRented);
+            return new SuccessResult(Messages.CarRented);
             }
             
             return new ErrorResult(Messages.CarNotAvailable);
